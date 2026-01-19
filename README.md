@@ -1,0 +1,1 @@
+# Dynamic-Bitwise-Alphanumeric-Shellcode-Encoding-Scheme
