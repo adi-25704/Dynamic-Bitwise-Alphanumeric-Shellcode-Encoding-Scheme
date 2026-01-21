@@ -1,11 +1,6 @@
 # Dynamic-Bitwise-Alphanumeric-Shellcode-Encoding-Scheme
 
 
-
-Here is a comprehensive README.md file tailored to your repository. It incorporates the technical details, the unique two-stage decoding mechanism, and the experimental results from the text you provided.
-You can copy and paste this directly into your repository.
-# Dynamic Bit-Width Alphanumeric Shellcode Encoder
-
 ![License](https://img.shields.io/badge/license-MIT-blue.svg) ![Platform](https://img.shields.io/badge/platform-linux--x86-lightgrey.svg) ![Python](https://img.shields.io/badge/python-3.8%2B-blue.svg)
 
 ## 📜 Abstract
@@ -15,23 +10,23 @@ This method achieves a theoretical redundancy of **36.29%** (closer to the Shann
 
 ## 🚀 Key Features
 * **Dynamic Bit-Width Selection:** Adaptively switches between 5-bit and 6-bit extraction to minimize waste.
-* **Two-Stage Decoder:** Uses a highly optimized, bit-accumulating custom decoder stub, which is itself encoded using Alpha3 to ensure the entire payload remains alphanumeric.
+* **Two-Stage Decoder:** Uses a optimized, bit-accumulating custom decoder stub, which is itself encoded using Alpha3 to ensure the entire payload remains alphanumeric.
 * **In-Place Decoding:** The decoder reconstructs the original shellcode directly in memory, overwriting the encoded payload.
 * **High Efficiency:** Superior compression for large payloads compared to Rix and Alpha3.
 
 ## 📂 Repository Structure
 
 ```text
-├── encoder/
-│   ├── encoder.py          # Main encoding script (Dynamic Bit-Width logic)
-│   └── alpha3.py           # Alpha3 implementation for the second stage
-├── decoder/
-│   ├── decoder.asm         # Source assembly for the custom decoder stub
-│   └── decoder_template.bin # Compiled binary of the decoder stub
-├── tests/
-│   ├── shellcodes/         # Raw shellcodes used for evaluation (from Shell-Storm)
-│   ├── loaders/            # C programs to test/execute the generated shellcode
-│   └── validation_script.py # Automated test runner
+├── Encode_Decode_Codes/
+│   ├── Encoder.c          # Main encoding script (Dynamic Bit-Width logic)
+│   └── Encoder.out
+|   └── Alphanumeric_Decoder_Without_Alpha3.asm  # Uncompiled assembly code of only the custom decoder without Alpha3 stage
+|   └── Alphanumeric_Decoder_Without_Alpha3.bin  # Compiled binary of the decoder stub
+|   └── Alphanumeric_Decoder_With_Alpha3.bin    # Compiled binary of the decoder stub
+├── Final_Output_Mine/
+│   ├── Test_*.bin         # Source assembly for the custom decoder stub
+│   └── decoder_template.bin 
+├── Original_Shellcodes/  # Raw shellcodes used for evaluation (from Shell-Storm)
 └── README.md
 
 🛠️ Prerequisites
@@ -82,5 +77,3 @@ This tool is intended for educational purposes and security research only. The a
  * Alpha3: SkyLined, "Alpha3 - Alphanumeric Shellcode Encoder."
  * Rix: "Writing IA32 Alphanumeric Shellcodes," Phrack Magazine, Issue 57.
  * Key1: Liu et al., "Shortest Printable Shellcode Encoding Algorithm Based on Dynamic Bitwidth Selection," 2025.
-<!-- end list -->
-
