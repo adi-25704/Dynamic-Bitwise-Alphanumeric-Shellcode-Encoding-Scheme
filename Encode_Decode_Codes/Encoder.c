@@ -1,4 +1,3 @@
-// 将shellcode进行编码并输出位shellcode.bin， 并且以0x7e为结尾
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -33,7 +32,7 @@ size_t encode_0(uint8_t *data_in, size_t len_in, uint8_t *data_out) {
         data_out[j++] = val + 0x20;
     }
     data_out[j++] = 0x7e;
-    return j; // 返回输出数据的长度
+    return j; 
 }
 size_t encode(uint8_t *data_in, size_t len_in, uint8_t *data_out) {
     uint16_t val = 0;
@@ -106,9 +105,9 @@ char* remove_extension(const char* filename) {
         }
         return result;
     }
-    return strdup(file_start); // 如果没有扩展名，返回文件名部分的副本
+    return strdup(file_start);
 }
-// 函数：拼接新的输出文件名
+
 char* create_output_filename(const char* input_file) {
     char* file_without_extension = remove_extension(input_file);
     if (!file_without_extension) {
@@ -127,20 +126,17 @@ char* create_output_filename(const char* input_file) {
     return output_filename;
 }
 int main(int argc, char *argv[]) {
-    // 打开输入文件
-    // FILE *fin = fopen("w32-exec-calc-shellcode.bin", "rb");
+    
     FILE *fin = fopen(argv[1], "rb");
     if (!fin) {
         perror("Failed to open input file");
         return 1;
     }
 
-    // 获取文件大小
     fseek(fin, 0, SEEK_END);
     size_t len_in = ftell(fin);
     fseek(fin, 0, SEEK_SET);
 
-    // 分配内存读取文件内容
     uint8_t *data_in = malloc(len_in);
     if (!data_in) {
         perror("Failed to allocate memory");
@@ -148,7 +144,6 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    // 读取文件内容
     size_t read_len = fread(data_in, 1, len_in, fin);
     if (read_len != len_in) {
         perror("Failed to read file content");
@@ -158,24 +153,19 @@ int main(int argc, char *argv[]) {
     }
     fclose(fin);
 
-    // 分配内存用于输出数据
-    uint8_t *data_out = malloc(len_in * 2); // 假设输出数据不会超过输入数据的两倍
+    uint8_t *data_out = malloc(len_in * 2);
     if (!data_out) {
         perror("Failed to allocate memory for output");
         free(data_in);
         return 1;
     }
 
-    // 调用 encode 函数
     size_t len_out = encode(data_in, len_in, data_out);
 
-    // 保存输出数据到文件
     // FILE *fout = fopen("shellcode.bin", "wb");
-    // 创建输出文件名
     char* output_file = create_output_filename(argv[1]);
     printf("output_file: %s\n", output_file);
 
-    // 打开输出文件
     FILE *fout = fopen(output_file, "wb");
     if (!fout) {
         perror("Failed to open file for writing");
@@ -194,7 +184,6 @@ int main(int argc, char *argv[]) {
     }
     fclose(fout);
 
-    // 释放内存
     free(data_in);
     free(data_out);
 
