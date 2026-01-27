@@ -18,17 +18,17 @@ This method achieves a theoretical redundancy of **36.29%** (closer to the Shann
 ```text
 ├── Encode_Decode_Codes/
 │   ├── Encoder.c          # Main encoding script (Dynamic Bit-Width logic)
-│   └── Encoder.out
-|   └── Alphanumeric_Decoder_Without_Alpha3.asm  # Uncompiled assembly code of only the custom decoder without Alpha3 stage
-|   └── Alphanumeric_Decoder_Without_Alpha3.bin  # Compiled binary of the decoder stub
-|   └── Alphanumeric_Decoder_With_Alpha3.bin    # Compiled binary of the decoder stub
+│   ├──Encoder.out
+|   ├── Alphanumeric_Decoder_Without_Alpha3.asm  # Uncompiled assembly code of only the custom decoder without Alpha3 stage
+|   ├── Alphanumeric_Decoder_Without_Alpha3.bin  # Compiled binary of the decoder stub
+|   ├── Alphanumeric_Decoder_With_Alpha3.bin    # Compiled binary of the decoder stub
 |   └── run.py #python file to combine decoder with encoded payload
 ├── Final_Encoded_Test_Codes/
 │   ├── *_encoded_combined.bin         # Source assembly for the custom decoder stub
-│   └── test.c    # Template C code for the decoder stub
+│   ├── test.c    # Template C code for the decoder stub
 │   └── test.out
 ├── Original_ShellCodes/
-|   ├── *.bin  # Raw shellcodes used for evaluation (Modified form of shellcodes taken from Shell-Storm)
+|   └── *.bin  # Raw shellcodes used for evaluation (Modified form of shellcodes taken from Shell-Storm)
 └── README.md
 ```
 
@@ -41,7 +41,7 @@ This method achieves a theoretical redundancy of **36.29%** (closer to the Shann
 ### Usage
 1. Basic Encoding
 * To encode a raw shellcode binary file:
-```C language
+```bash
 ./Encoder.out <shellcode.bin>
 ```
 * The encoded output will be stored in ./temp/*_encoded.bin
@@ -79,13 +79,13 @@ We compared this scheme against industry standards (Alpha3 and Rix) and other al
 
 ### Technical Details
 The Bit-Width Algorithm
-The encoder analyzes the next 6 bits of the stream (x_6).
- * Check 6-bit Range: If x_6 \in [0x26, 0x3F], it maps to a-z.
- * Fallback to 5-bit: If not, it analyzes the first 5 bits (x_5).
-   * If x_5 \in [0x06, 0x1F], it maps to A-Z.
-   * If x_5 \in [0x00, 0x05], it maps to 0-5.
+The encoder analyzes the next 6 bits of the stream ($x_6$).
+ * Check 6-bit Range: If $x_6 \in [0x26, 0x3F]$, it maps to a-z.
+ * Fallback to 5-bit: If not, it analyzes the first 5 bits ($x_5$).
+   * If $x_5 \in [0x06, 0x1F]$, it maps to A-Z.
+   * If $x_5 \in [0x00, 0x05]$, it maps to 0-5.
 Custom Decoder Stub
-The decoder uses a loop with SHL and ADC instructions to reconstruct bytes bit-by-bit in the EAX register. It utilizes optimizations like XCHG instead of MOV and implicit EAX opcodes to reduce the stub size to 74 bytes (before Alpha3 encoding).
+The decoder uses a loop with SHL and ADC instructions to reconstruct bytes bit-by-bit in the EAX register. It utilizes optimizations like XCHG instead of MOV and implicit EAX opcodes to reduce the stub size to 74 bytes on x86 (before Alpha3 encoding).
 
 ### Disclaimer
 This tool is intended for educational purposes and security research only. The author is not responsible for any misuse of the code provided in this repository. Ensure you have authorization before testing shellcode on any system.
