@@ -3,18 +3,18 @@
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg) ![Platform](https://img.shields.io/badge/platform-linux--x86-lightgrey.svg) ![Python](https://img.shields.io/badge/python-3.8%2B-blue.svg)
 
-### 📜 Abstract
+### Abstract
 This repository contains the implementation of a novel **Alphanumeric Shellcode Encoding Scheme** based on dynamic bit-width selection. Unlike traditional encoders (like Alpha3) that use fixed byte-level mapping ($2\times$ expansion), this approach treats the input as a continuous bit stream, dynamically extracting **5 or 6-bit sequences** to map them into valid alphanumeric ASCII ranges.
 
 This method achieves a theoretical redundancy of **36.29%** (closer to the Shannon entropy limit) and outperforms Alpha3 in terms of payload density for shellcodes larger than **295 bytes**.
 
-### 🚀 Key Features
+### Key Features
 * **Dynamic Bit-Width Selection:** Adaptively switches between 5-bit and 6-bit extraction to minimize waste.
 * **Two-Stage Decoder:** Uses a optimized, bit-accumulating custom decoder stub, which is itself encoded using Alpha3 to ensure the entire payload remains alphanumeric.
 * **In-Place Decoding:** The decoder reconstructs the original shellcode directly in memory, overwriting the encoded payload.
 * **Higher Efficiency:** Superior compression for large payloads compared to Rix and Alpha3.
 
-### 📂 Repository Structure
+### Repository Structure
 ```text
 ├── Encode_Decode_Codes/
 │   ├── Encoder.c          # Main encoding script (Dynamic Bit-Width logic)
@@ -32,13 +32,13 @@ This method achieves a theoretical redundancy of **36.29%** (closer to the Shann
 └── README.md
 ```
 
-### 🛠️ Prerequisites
+### Prerequisites
  * Python 3.8+
  * NASM (Netwide Assembler) - for modifying/reassembling the decoder stub.
  * GCC - for compiling the test loaders.
  * Linux Environment (Tested on Ubuntu 24.04 LTS).
    
-### 💻 Usage
+### Usage
 1. Basic Encoding
 * To encode a raw shellcode binary file:
 ```C language
@@ -58,7 +58,7 @@ python3 run.py <shellcode_file>
 ./test.exe
 ```
 
-### 📊 Performance & Evaluation
+### Performance & Evaluation
 We compared this scheme against industry standards (Alpha3 and Rix) and other alphanumeric schemes using shellcodes of varying sizes.
 | Sr | Shellcode Name | Orig. | Our Scheme | Alpha3 | A3+AF | Rix+AF | Rix |
 |----|----------------|-------|------------|--------|-------|--------|-----|
@@ -77,7 +77,7 @@ We compared this scheme against industry standards (Alpha3 and Rix) and other al
 
 **Conclusion:** While Alpha3 is efficient for small payloads (due to a smaller decoder stub), our scheme scales better. The "crossover point" is approximately 295 bytes, after which our dynamic bit-width selection yields a smaller total payload. While the combination of Alpha3 and Alpha Freedom (A3+AF) remains competitive at larger sizes, our scheme performs comparably well.
 
-### 🧠 Technical Details
+### Technical Details
 The Bit-Width Algorithm
 The encoder analyzes the next 6 bits of the stream (x_6).
  * Check 6-bit Range: If x_6 \in [0x26, 0x3F], it maps to a-z.
@@ -87,10 +87,10 @@ The encoder analyzes the next 6 bits of the stream (x_6).
 Custom Decoder Stub
 The decoder uses a loop with SHL and ADC instructions to reconstruct bytes bit-by-bit in the EAX register. It utilizes optimizations like XCHG instead of MOV and implicit EAX opcodes to reduce the stub size to 74 bytes (before Alpha3 encoding).
 
-### ⚠️ Disclaimer
+### Disclaimer
 This tool is intended for educational purposes and security research only. The author is not responsible for any misuse of the code provided in this repository. Ensure you have authorization before testing shellcode on any system.
 
-### 📚 References
+### References
  [1] Hadrien Barral, Houda Ferradi, Rémi Géraud, Georges-Axel Jaloyan, and David Naccache. **ARMv8 Shellcodes from ‘A’ to ‘Z’.** In *International Conference on Information Security Practice and Experience*, Springer, 2016, pp. 354–377.
 
 [2] A. Basu, A. Mathuria, and N. Chowdhary. **Automatic Generation of Compact Alphanumeric Shellcodes for x86.** In *International Conference on Information Systems Security (ICISS 2014)*, Lecture Notes in Computer Science, Vol. 8880, Springer, 2014, pp. 399–410. doi: https://doi.org/10.1007/978-3-319-13841-1_22
