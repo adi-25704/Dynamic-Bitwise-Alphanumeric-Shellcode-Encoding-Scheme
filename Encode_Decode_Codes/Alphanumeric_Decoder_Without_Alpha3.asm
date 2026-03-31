@@ -4,14 +4,12 @@ BITS 32 ;
 section .text
 global _start
 _start:
-setup: ;
+setup:
     xchg esi, eax
     xor eax,eax
     mov ah, 0x39
     mov bl,0xbf
-    mov cl,0xff        ;
-;xor_patcher:        len_0 = 26*3 = 0x4e, len = 0x4e+0x03;  bl = 0xbf, ah = 0x39, cl = 0xff, al = 0x00
-    ;add esi, 0x21
+    mov cl,0xff
 looper_setup:
     add esi, 0x7f
     add esi, 0x31
@@ -31,7 +29,6 @@ subtract:
         sub byte [esi], 0x3b
 
 get_next:
-        ;clc;Do i require this needs to be checked.
         adc al, cl
         SHL ebx, cl
         xor bl, [esi]
