@@ -91,20 +91,19 @@ The decoder uses a loop with SHL and ADC instructions to reconstruct bytes bit-b
 This tool is intended for educational purposes and security research only. The author is not responsible for any misuse of the code provided in this repository. Ensure you have authorization before testing shellcode on any system.
 
 ### References
- [1] Hadrien Barral, Houda Ferradi, Rémi Géraud, Georges-Axel Jaloyan, and David Naccache. **ARMv8 Shellcodes from ‘A’ to ‘Z’.** In *International Conference on Information Security Practice and Experience*, Springer, 2016, pp. 354–377.
 
-[2] A. Basu, A. Mathuria, and N. Chowdhary. **Automatic Generation of Compact Alphanumeric Shellcodes for x86.** In *International Conference on Information Systems Security (ICISS 2014)*, Lecture Notes in Computer Science, Vol. 8880, Springer, 2014, pp. 399–410. doi: https://doi.org/10.1007/978-3-319-13841-1_22
+[1] Basu, A., Mathuria, A., Chowdhary, N.: Automatic generation of compact alphanumeric shellcodes for x86. In: International Conference on Information Systems Security (ICISS) 2014. Lecture Notes in Computer Science, vol. 8880, pp. 399–410. Springer (2014)
 
-[3] Jian Lin, Guoan Liu, Rui Chang, and Ruimin Wang. **Proteus: An Automatical High-Efficiency Framework for Generating Compact and Printable Shellcode on ARMv8.** In *Proceedings of the 16th International Conference on Internetware*, 2025, pp. 198–208.
+[2] Liu, G., Lin, J., Dong, W., Liu, J., Liu, T.: Shortest printable shellcode encoding algorithm based on dynamic bitwidth selection. In: Australasian Conference on Information Security and Privacy, pp. 447–458. Springer (2025)
 
-[4] Guoan Liu, Jian Lin, Weiyu Dong, Jiaan Liu, and Tieming Liu. **Shortest Printable Shellcode Encoding Algorithm Based on Dynamic Bitwidth Selection.** In *Australasian Conference on Information Security and Privacy*, Springer, 2025, pp. 447–458.
+[3] Patel, A.: Automatic compact alphanumeric encoding shellcode. Master’s thesis, Dhirubhai Ambani University (Formerly DA-IICT) (2016)
 
-[5] Dhrumil Patel, Aditya Basu, and Anish Mathuria. **Automatic Generation of Compact Printable Shellcodes for x86.** In *14th USENIX Workshop on Offensive Technologies (WOOT ’20)*, 2020.
+[4] Patel, D., Basu, A., Mathuria, A.: Automatic generation of compact printable shellcodes for x86. In: 14th USENIX Workshop on Offensive Technologies (WOOT 20) (2020)
 
-[6] Rix. **Writing ia32 Alphanumeric Shellcodes.**, *Phrack Magazine*, Issue 57, Article 15, August 2001. https://phrack.org/issues/57/15
+[5] Rix: Writing ia32 alphanumeric shellcodes. Phrack Magazine 57(15) (Aug 2001)
 
-[7] J. Salwan, **Shell-Storm: Shellcode Database.** Website, 2008–2025. https://www.shell-storm.org/shellcode/  
+[6] Salwan, J.: Shell-Storm: Shellcode database. Website (2008–2025). https://www.shell-storm.org/shellcode/
 
-[8] SkyLined. **Alpha3 — Alphanumeric Architecture-Agnostic Shellcode Encoder.** Online tool / software release, 2004. https://github.com/SkyLined/alpha3  
+[7] SkyLined: Alpha3 — Alphanumeric architecture agnostic shellcode encoder. Online tool/software (2004). https://github.com/SkyLined/alpha3
 
-[9] Yuanding Zhou. **Least Information Redundancy Algorithm of Printable Shellcode Encoding for x86.** In *European Symposium on Research in Computer Security*, Springer, 2023, pp. 361–376.
+[8] Zhou, Y.: Least information redundancy algorithm of printable shellcode encoding for x86. In: European Symposium on Research in Computer Security, pp. 361–376. Springer (2023)
