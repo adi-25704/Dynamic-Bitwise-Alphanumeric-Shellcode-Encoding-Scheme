@@ -1,5 +1,3 @@
-;nasm -f bin .\new_origin.asm -o decoder_ing.bin
-;ndisasm -b32 .\origin.asm
 BITS 32 ;
 section .text
 global _start
