@@ -7,33 +7,6 @@
 #else
 #include <libgen.h>  // For POSIX systems
 #endif
-size_t encode_0(uint8_t *data_in, size_t len_in, uint8_t *data_out) {
-    uint16_t val = 0;
-    size_t bits = 0;
-    size_t j = 0;
-    for (size_t i = 0; i < len_in; i++) {
-        val = (val << 8) | data_in[i];
-        bits += 8;
-        while (bits >= 7) {
-            uint16_t tmp = val >> (bits - 7);
-            size_t right_bits = 7;
-            if ((tmp >= 0x40) & (tmp < 0x5e)) {
-            } else {
-                tmp = val >> (bits - 6);
-                right_bits = 6;
-            }
-            data_out[j++] = tmp + 0x20;
-            bits -= right_bits;
-            val = val & ((1 << bits) - 1);
-        }
-    }
-    if (bits != 0) {
-        val = val << (6 - bits);
-        data_out[j++] = val + 0x20;
-    }
-    data_out[j++] = 0x7e;
-    return j; 
-}
 size_t encode(uint8_t *data_in, size_t len_in, uint8_t *data_out) {
     uint16_t val = 0;
     size_t bits = 0;
@@ -88,8 +61,7 @@ char* remove_extension(const char* filename) {
     const char* last_slash = NULL;
 
 #ifdef _WIN32
-    // last_slash = strrchr(filename, '\\');  // Windows path separator
-    last_slash = strrchr(filename, '/');  // Windows path separator
+    last_slash = strrchr(filename, '\\');  // Windows path separator
 #else
     last_slash = strrchr(filename, '/');  // POSIX path separator
 #endif
@@ -162,7 +134,6 @@ int main(int argc, char *argv[]) {
 
     size_t len_out = encode(data_in, len_in, data_out);
 
-    // FILE *fout = fopen("shellcode.bin", "wb");
     char* output_file = create_output_filename(argv[1]);
     printf("output_file: %s\n", output_file);
 
@@ -186,6 +157,7 @@ int main(int argc, char *argv[]) {
 
     free(data_in);
     free(data_out);
+    free(output_file);
 
     printf("Encoding completed successfully.\n");
     return 0;
